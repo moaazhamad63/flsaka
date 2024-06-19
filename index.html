@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحث المنتجات</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:300,400,600,700">
+    <style>
+        /* Global Styles */
+          * {
+
+        box-sizing: border-box;
+
+        margin: 0;
+
+        padding: 0;
+
+    }
+
+    body {
+
+        font-family: 'Cairo', sans-serif;
+
+        background-color: #212121; /* Dark background color */
+
+        color: #fff; /* White text color */
+
+    }
+
+
+
+    /* Container Styles */
+
+   .container {
+
+        max-width: 80%; /* Use relative unit instead of fixed width */
+
+        margin: 40px auto;
+
+        padding: 20px;
+
+        background-color: #333; /* Dark background color */
+
+        border: 1px solid #444; /* Dark border color */
+
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Dark shadow */
+
+        border-radius: 10px; /* Add rounded edges */
+
+        direction: rtl; /* Right-to-left direction */
+
+    }
+
+
+
+
+
+        /* Search Form Styles */
+    .search-form {
+            font-family: "Cairo";
+            margin-bottom: 20px;
+            text-align: right; /* Right-align search form */
+        }
+    .search-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #555; /* Dark border color */
+            background-color: #444; /* Dark background color */
+            color: #fff; /* White text color */
+            border-radius: 5px; /* Add rounded edges */
+            direction: rtl; /* Right-to-left direction */
+        }
+    .search-form input[type="submit"] {
+            padding: 11px 38px;
+            font-size: 16px;
+            background-color: #0e3ee5; /* Dark background color */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px; /* Add rounded edges */
+            cursor: pointer;
+            direction: rtl; /* Right-to-left direction */
+        }
+    .search-form input[type="submit"]:hover {
+            background-color: #84562; /* Dark hover color */
+        }
+
+        /* Product Table Styles */
+    .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px; /* Add rounded edges */
+        }
+    .product-table th,.product-table td {
+            padding: 10px;
+            text-align: left;
+
+            border-bottom: 1px solid #444; /* Dark border color */
+       }
+   .product-table th {
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+
+        }
+   .product-table tr:nth-child(even) {
+            background-color: #444; /* Dark background color */
+        }
+
+        /* Header Styles */
+     header {
+            text-align: center; /* Center the header */
+        }
+     header h1 {
+            margin: 0; /* Remove margin */
+            font-size: 36px; /* Increase font size */
+        }
+            /* Responsive Design */
+
+    @media only screen and (max-width: 768px) { /* Tablet and mobile */
+
+       .container {
+
+            max-width: 95%;
+            margin: 20px auto;
+            display-flex: flex;
+            padding: 15px;
+
+        }
+       .search-form input[type="submit"]{
+            margin: 10px auto;
+       },
+
+       .search-form input[type="text"],.add-product-form input[type="text"],.add-product-form textarea {
+
+            width: 90%;
+
+        }
+
+       .product-table {
+
+            font-size: 14px;
+
+        }
+
+    }
+
+
+
+    @media only screen and (max-width: 480px) { /* Mobile */
+       .search-form input[type="submit"]{
+            width: 130px;
+       },
+
+       .container {
+
+            max-width: 95%;
+
+            margin: 10px auto;
+
+            padding: 10px;
+
+        },
+
+       .search-form input[type="text"],.add-product-form input[type="text"],.add-product-form textarea {
+            width: 95%;
+
+        },
+
+       .product-table {
+
+            font-size: 12px;
+
+        }
+
+    }
+
+        /* Footer Styles */
+   .footer {
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+            padding: 10px;
+            text-align: center;
+            clear: both;
+            position: fixed; /* Fixed footer */
+            bottom: 0; /* Bottom of the page */
+            width: 100%; /* Full width */
+            border-radius: 10px 10px 0 0; /* Add rounded edges to top */
+            direction: rtl; /* Right-to-left direction */
+        }
+        .footer a {
+            text-decoration: none;
+            color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>أولاد حمد لقطع غيار السيارات</h1>
+</header>
+
+<main>
+    <section class="container">
+        <form class="search-form" action="" method="post">
+            <input type="text" name="product_name" placeholder="أدخل اسم المنتج" value="{{ search_query }}">
+            <input type="submit" value="بحث">
+        </form>
+        {% if products %}
+        <table class="product-table">
+            <tr>
+                <th>الكود</th>
+                <th>اسم المنتج</th>
+                <th>السعر</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product[0] }}</td>
+                <td>{{ product[1] }}</td>
+                <td>{{ product[2] }}</td>
+                <td>{{ product[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>لم يتم العثور على أي منتجات.</p>
+        {% endif %}
+    </section>
+</main>
+<footer class="footer">
+    <p>&copy; جميع الحقوق محفوظة ل Mo'az Hamad</p>
+    <a href="https://flask-app-eomv.onrender.com/dashboard">Dashboard</a>
+</footer>
+</body>
+</html>
